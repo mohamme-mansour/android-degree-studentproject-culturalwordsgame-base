@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <string name="app_name">Heritage words</string>
+    <string name="share_the_question_with_friends">Ask a friend</string>
+    <string name="share_question_text" >Share</string>
+    <string name="share_title_hint" >Add a title</string>
+    <string name="the_right_answer_is" >The answer is</string>
+    <string name="back_text" >Back</string>
+    <string name="permission_title" >Clarification</string>
+    <string name="permission_explanation" >The application needs to gain write permission on the external storage to store the image in preparation for its sharing by other applications</string>
+    <string name="permission_denied" >The operation was not executed because the necessary permissions were not granted</string>
+    <string name="change_lang_text" translatable="false" >Change Language</string>
+    <string name="toast_message" translatable="false" >Click on the bottom right button to start the game before sharing the question</string>
+    <string name="toast_message2" translatable="false" >Click on the bottom right button to start the game before showing the answers</string>
+
+
+    <string-array name="answers" >
+        <item>aleiqal: It is placed over the hat / ghutra to fix it</item>
+        <item>The undercoat: Lined with wool, it is worn in winter to protect against the cold</item>
+        <item>Sadu: One of the traditional Bedouin weaving types</item>
+        <item>henna: It is used to dye hair and beards, and it is also used to beautify the hands of women</item>
+        <item>Dallah: The bowl used to serve coffee by the Arabs</item>
+        <item>Slippers: Made of leather, it is worn on the feet, it was ancient by the Arabs</item>
+        <item>Dagger: A small white weapon that is placed on the waist</item>
+        <item>alnamriqa: A small pillow to lean on</item>
+        <item>lantern / alsiraj: The name of the tool that was used for lighting in the past</item>
+        <item>Lantern: A tool used for lighting and decorations</item>
+        <item>altarbush: Red hat was famous in the Levant, Egypt and Morocco</item>
+        <item>Turban: Overhead cap</item>
+        <item>Dishdasha: Arab dress is widely worn in the Gulf countries</item>
+    </string-array>
+
+    <string-array name="answer_description" >
+        <item>It is placed over the hat / ghutra to fix it</item>
+        <item>Lined with wool, it is worn in winter to protect against the cold</item>
+        <item>One of the traditional Bedouin weaving types</item>
+        <item>It is used to dye hair and beards, and it is also used to beautify the hands of women</item>
+        <item>The bowl used to serve coffee by the Arabs</item>
+        <item>Made of leather, it is worn on the feet, it was ancient by the Arabs</item>
+        <item>A small white weapon that is placed on the waist</item>
+        <item>A small pillow to lean on</item>
+        <item>The name of the tool that was used for lighting in the past</item>
+        <item>A tool used for lighting and decorations</item>
+        <item>Red hat was famous in the Levant, Egypt and Morocco</item>
+        <item>Overhead cap</item>
+        <item>Arab dress is widely worn in the Gulf countries</item>
+    </string-array>
+
+</resources>
