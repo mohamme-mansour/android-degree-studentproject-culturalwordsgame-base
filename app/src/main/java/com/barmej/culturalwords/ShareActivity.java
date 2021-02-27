@@ -1,9 +1,11 @@
 package com.barmej.culturalwords;
 import android.Manifest;
+import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -74,14 +76,14 @@ public class ShareActivity extends AppCompatActivity {
         }
     }
 
-    public void shareButton(View view) {
+    public void shareButton(View view)
+    {
         int currentQuestion = getIntent().getIntExtra("QuestionShare" , 0);
-        Uri imageUri = Uri.parse("android.resource://com.barmej.culturalwords/drawable/" + currentQuestion);
         String questionTitle = sharedTitle.getText().toString();
 
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_SEND);
-        intent.putExtra(Intent.EXTRA_STREAM, imageUri);
+        intent.putExtra(Intent.EXTRA_STREAM, resourceToUri(currentQuestion));
         intent.setType("image/*");;
         intent.putExtra(Intent.EXTRA_TEXT, questionTitle);
         startActivity(Intent.createChooser(intent, "Share images to.."));
@@ -91,6 +93,17 @@ public class ShareActivity extends AppCompatActivity {
         editor.putString("Share Title", questionTitle);
         editor.apply();
 
-//        checkPermissionAndShare();
+    }
+
+    private Uri resourceToUri(int currentQuestion){
+        Resources resources = getApplicationContext().getResources();
+        Uri imageUri = new Uri.Builder()
+                .scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
+                .authority(resources.getResourcePackageName(currentQuestion))
+                .appendPath(resources.getResourceTypeName(currentQuestion))
+                .appendPath(resources.getResourceEntryName(currentQuestion))
+                .build();
+
+        return imageUri;
     }
 }

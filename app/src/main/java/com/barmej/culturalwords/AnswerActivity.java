@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class AnswerActivity extends AppCompatActivity {
 
     TextView questionAnswer;
+    private final static String ANSWER_PACKAGE = "AnswerPackage";
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,9 +18,9 @@ public class AnswerActivity extends AppCompatActivity {
 
         questionAnswer = findViewById(R.id.text_view_answer);
 
-        questionAnswer.setText(getIntent().getStringExtra("AnswerPackage"));
+        questionAnswer.setText(getIntent().getStringExtra(ANSWER_PACKAGE));
     }
-    public void Back(View view) {
+    public void back(View view) {
         finish();
     }
 

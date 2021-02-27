@@ -26,13 +26,13 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String SHARED_PREFERENCES_CONSTANT_1 = "app pref";
     private static final String SHARED_PREFERENCES_CONSTANT_2 = "Keep Language";
-    ImageView imageViewQuestion;
-    String randomImagesNames;
+    private ImageView imageViewQuestion;
+    private String randomImagesNames;
     ImageButton imageAnswerPage;
-    ImageView languageChange;
-    ImageView shareButton;
-    int randomImageQuestion;
-    int randomImage;
+    private ImageView languageChange;
+    private ImageView shareButton;
+    private int randomImageQuestion;
+    private int randomImage;
 
     int[] imagesQuestion = {
             R.drawable.icon_1,
@@ -53,7 +53,8 @@ public class MainActivity extends AppCompatActivity {
     String[] imagesNames;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -67,45 +68,55 @@ public class MainActivity extends AppCompatActivity {
         languageChange = findViewById(R.id.button_change_language);
         shareButton = findViewById(R.id.button_share_question);
 
-        shareButton.setOnClickListener(new View.OnClickListener() {
+        shareButton.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
                 sharePage();
             }
         });
 
-        languageChange.setOnClickListener(new View.OnClickListener() {@Override
-        public void onClick(View view) {
-            button();
-
-        }
+        languageChange.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                showLanguageDialog();
+            }
         });
 
     }
 
 
 
-    public boolean button() {
-        showLanguageDialog();
-        return true;
-    }
+
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.langueageMenu) {
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        if (item.getItemId() == R.id.langueageMenu)
+        {
             showLanguageDialog();
             return true;
 
-        } else {
+        }
+        else
+        {
             return super.onOptionsItemSelected(item);
         }
     }
 
-    private void showLanguageDialog() {
-        AlertDialog alertDialog = new AlertDialog.Builder(this).setTitle(R.string.change_lang_text).setItems(R.array.Languages, new DialogInterface.OnClickListener() {@Override
-        public void onClick(DialogInterface dialogInterface, int which) {
+    private void showLanguageDialog()
+    {
+        AlertDialog alertDialog = new AlertDialog.Builder(this).setTitle(R.string.change_lang_text).setItems(R.array.Languages, new DialogInterface.OnClickListener()
+        {
+        @Override
+        public void onClick(DialogInterface dialogInterface, int which)
+        {
             String language = "en";
-            switch (which) {
+            switch (which)
+            {
                 case 0:
                     language = "arabic";
                     break;
@@ -115,9 +126,7 @@ public class MainActivity extends AppCompatActivity {
             }
             saveLanguage(language);
             LocaleHelper.setLocale(MainActivity.this, language);
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-            finish();
-            startActivity(intent);
+            recreate();
 
         }
         }).create();
@@ -125,24 +134,36 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void saveLanguage(String lang) {
+    @Override
+    public void recreate()
+    {
+        super.recreate();
+    }
+
+    public void saveLanguage(String lang)
+    {
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFERENCES_CONSTANT_2, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("app lang", lang);
         editor.apply();
     }
 
-    private void sharePage() {
-        if (imageViewQuestion.getDrawable() == null){
+    private void sharePage()
+    {
+        if (imageViewQuestion.getDrawable() == null)
+        {
             Toast.makeText(this, R.string.toast_message, Toast.LENGTH_LONG).show();
-        } else {
+        }
+        else
+        {
             Intent intent = new Intent(MainActivity.this, ShareActivity.class);
             intent.putExtra("QuestionShare", randomImageQuestion);
             startActivity(intent);
         }
     }
 
-    public void randomImageQuestion(View view) {
+    public void randomImageQuestion(View view)
+    {
         Random random = new Random();
         randomImage = random.nextInt(imagesQuestion.length);
         randomImageQuestion = imagesQuestion[randomImage];
@@ -151,10 +172,14 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void answerPage(View view) {
-        if (imageViewQuestion.getDrawable() == null){
+    public void answerPage(View view)
+    {
+        if (imageViewQuestion.getDrawable() == null)
+        {
             Toast.makeText(this, R.string.toast_message2, Toast.LENGTH_LONG).show();
-        } else {
+        }
+        else
+        {
             Intent intent = new Intent(MainActivity.this, AnswerActivity.class);
             intent.putExtra("AnswerPackage", randomImagesNames);
             startActivity(intent);
@@ -163,7 +188,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onSaveInstanceState(@NonNull Bundle outState) {
+    protected void onSaveInstanceState(@NonNull Bundle outState)
+    {
         super.onSaveInstanceState(outState);
         // outState is used to put the thing we need to save in... it needs a key and a resource
         outState.putInt("thing" , randomImageQuestion);
@@ -172,7 +198,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+    protected void onRestoreInstanceState(Bundle savedInstanceState)
+    {
         super.onRestoreInstanceState(savedInstanceState);
         // randomImageQuestion = savedInstanceState.getInt(); this is used to make RandomImageQuestion value the same as what we last saved at onSaveInstance
         randomImageQuestion = savedInstanceState.getInt("thing");
