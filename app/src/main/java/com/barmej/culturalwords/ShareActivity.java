@@ -26,7 +26,8 @@ public class ShareActivity extends AppCompatActivity {
     private static final int PERMISSIONS_WRITE_EXTERNAL_STORAGE = 123;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_share);
 
@@ -39,11 +40,14 @@ public class ShareActivity extends AppCompatActivity {
         String questionTitle = sharedPreferences.getString("Share Title", "");
         sharedTitle.setText(questionTitle);
     }
-    private void checkPermissionAndShare() {
+    public void checkPermissionAndShare(View view)
+    {
         // insertImage في النسخ من آندرويد 6 إلى آندرويد 9 يجب طلب الصلاحية لكي نتمكن من استخدام الدالة
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
+        {
             // هنا لا يوجد صلاحية للتطبيق ويجب علينا طلب الصلاحية منه عن طريك الكود التالي
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE))
+            {
                 // بسبب عدم منح المستخدم الصلاحية للتطبيق فمن الأفضل شرح فائدتها له عن طريق عرض رسالة تشرح ذلك
                 // هنا نقوم بإنشاء AlertDialog لعرض رسالة تشرح للمستخدم فائدة منح الصلاحية
                 AlertDialog alertDialog = new AlertDialog.Builder(this).setTitle(R.string.permission_title).setMessage(R.string.permission_explanation).setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {@Override
@@ -54,15 +58,20 @@ public class ShareActivity extends AppCompatActivity {
                             },
                             PERMISSIONS_WRITE_EXTERNAL_STORAGE);
                 }
-                }).setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {@Override
-                public void onClick(DialogInterface dialogInterface, int i) {
+                }).setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener()
+                {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i)
+                {
                     //  عند الضغط على زر منع نقوم بإخفاء الرسالة وكأن شيء لم يكن
                     dialogInterface.dismiss();
                 }
                 }).create();
                 // نقوم بإظهار الرسالة بعد إنشاء alertDialog
                 alertDialog.show();
-            } else {
+            }
+            else
+            {
                 // لا داعي لشرح فائدة الصلاحية للمستخدم ويمكننا طلب الصلاحية منه
                 ActivityCompat.requestPermissions(this, new String[] {
                                 Manifest.permission.WRITE_EXTERNAL_STORAGE
@@ -70,13 +79,15 @@ public class ShareActivity extends AppCompatActivity {
                         PERMISSIONS_WRITE_EXTERNAL_STORAGE);
             }
 
-        } else {
+        }
+        else
+        {
             // الصلاحية ممنوحه مسبقا لذلك يمكننا مشاركة الصورة
-            shareButton(shareButton);
+            shareButton();
         }
     }
 
-    public void shareButton(View view)
+    private void shareButton()
     {
         int currentQuestion = getIntent().getIntExtra("QuestionShare" , 0);
         String questionTitle = sharedTitle.getText().toString();

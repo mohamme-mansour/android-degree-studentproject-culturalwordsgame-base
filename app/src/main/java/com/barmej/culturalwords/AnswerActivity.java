@@ -8,11 +8,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class AnswerActivity extends AppCompatActivity {
 
-    TextView questionAnswer;
+    private TextView questionAnswer;
     private final static String ANSWER_PACKAGE = "AnswerPackage";
     
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_answer);
 
@@ -20,7 +21,8 @@ public class AnswerActivity extends AppCompatActivity {
 
         questionAnswer.setText(getIntent().getStringExtra(ANSWER_PACKAGE));
     }
-    public void back(View view) {
+    public void back(View view)
+    {
         finish();
     }
 
