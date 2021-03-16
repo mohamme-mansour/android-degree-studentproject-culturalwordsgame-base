@@ -8,18 +8,19 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class AnswerActivity extends AppCompatActivity {
 
-    private TextView questionAnswer;
     private final static String ANSWER_PACKAGE = "AnswerPackage";
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_answer);
 
-        questionAnswer = findViewById(R.id.text_view_answer);
+        TextView questionAnswer = findViewById(R.id.text_view_answer);
 
-        questionAnswer.setText(getIntent().getStringExtra(ANSWER_PACKAGE));
+        String test = getIntent().getStringExtra(ANSWER_PACKAGE);
+
+        questionAnswer.setText(test);
     }
     public void back(View view)
     {

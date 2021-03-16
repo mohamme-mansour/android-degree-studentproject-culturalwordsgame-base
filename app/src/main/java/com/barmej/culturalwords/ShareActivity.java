@@ -20,10 +20,10 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 public class ShareActivity extends AppCompatActivity {
 
+    private static final int PERMISSIONS_WRITE_EXTERNAL_STORAGE = 123;
+    private static final String SHARED_PREFERENCES_TITLE = "Share Title";
     ImageView sharedQuestion;
     EditText sharedTitle;
-    Button shareButton;
-    private static final int PERMISSIONS_WRITE_EXTERNAL_STORAGE = 123;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -32,12 +32,11 @@ public class ShareActivity extends AppCompatActivity {
         setContentView(R.layout.activity_share);
 
         sharedTitle = findViewById(R.id.edit_text_share_title);
-        shareButton = findViewById(R.id.button_share_question);
         sharedQuestion = findViewById(R.id.image_view_question);
         sharedQuestion.setImageResource(getIntent().getIntExtra("QuestionShare" , 0));
 
         SharedPreferences sharedPreferences = getSharedPreferences("lastEditText", MODE_PRIVATE);
-        String questionTitle = sharedPreferences.getString("Share Title", "");
+        String questionTitle = sharedPreferences.getString(SHARED_PREFERENCES_TITLE, "");
         sharedTitle.setText(questionTitle);
     }
     public void checkPermissionAndShare(View view)
@@ -95,13 +94,13 @@ public class ShareActivity extends AppCompatActivity {
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_SEND);
         intent.putExtra(Intent.EXTRA_STREAM, resourceToUri(currentQuestion));
-        intent.setType("image/*");;
+        intent.setType("image/*");
         intent.putExtra(Intent.EXTRA_TEXT, questionTitle);
         startActivity(Intent.createChooser(intent, "Share images to.."));
 
         SharedPreferences sharedPreferences = getSharedPreferences("lastEditText", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("Share Title", questionTitle);
+        editor.putString(SHARED_PREFERENCES_TITLE, questionTitle);
         editor.apply();
 
     }
@@ -114,6 +113,7 @@ public class ShareActivity extends AppCompatActivity {
                 .appendPath(resources.getResourceTypeName(currentQuestion))
                 .appendPath(resources.getResourceEntryName(currentQuestion))
                 .build();
+        System.out.println(imageUri.toString());
 
         return imageUri;
     }
