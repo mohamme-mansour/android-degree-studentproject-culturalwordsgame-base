@@ -13,6 +13,7 @@
     <string name="change_lang_text" translatable="false" >Change Language</string>
     <string name="toast_message" translatable="false" >Click on the bottom right button to start the game before sharing the question</string>
     <string name="toast_message2" translatable="false" >Click on the bottom right button to start the game before showing the answers</string>
+    <string name="permission_declined" translatable="false" tools:ignore="ExtraTranslation">Permission Denied</string>
 
 
     <string-array name="answers" >

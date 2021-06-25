@@ -12,6 +12,7 @@
     <string name="change_lang_text" translatable="false">تغيير اللغة</string>
     <string name="toast_message" translatable="false">انقر على الزر الأيمن السفلي لبدء اللعبة قبل مشاركة السؤال</string>
     <string name="toast_message2" translatable="false">انقر على الزر الأيمن السفلي لبدء اللعبة قبل إظهار الإجابات</string>
+    <string name="permission_declined" translatable="false" >الصلاحية رفضت</string>
 
     <string-array name="answers">
         <item>العقال: يوضع فوق الحطّة\الغترة لتثبيتها</item>
