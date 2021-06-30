@@ -90,12 +90,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public void recreate()
-    {
-        super.recreate();
-        answersOnChangeLanguage();
-    }
+
 
     public String answersOnChangeLanguage(){
         if (randomIndex >= 0){
@@ -161,8 +156,6 @@ public class MainActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
         outState.putInt("randomImage" , randomIndex);
         outState.putString("language" , language);
-        outState.putInt("thing" , answerImage);
-        outState.putString("thingTest" , answersOnChangeLanguage());
     }
 
     @Override
@@ -171,8 +164,8 @@ public class MainActivity extends AppCompatActivity {
         super.onRestoreInstanceState(savedInstanceState);
         randomIndex = savedInstanceState.getInt("randomImage");
         language = savedInstanceState.getString("language");
-        answerName = savedInstanceState.getString("thingTest");
-        answerImage = savedInstanceState.getInt("thing");
+        answerName = answers[randomIndex];
+        answerImage = answersImages[randomIndex];
         imageViewQuestion.setImageResource(answerImage);
     }
 }

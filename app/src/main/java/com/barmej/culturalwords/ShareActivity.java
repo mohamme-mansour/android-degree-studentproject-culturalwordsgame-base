@@ -33,8 +33,7 @@ public class ShareActivity extends AppCompatActivity {
 
     private static final int PERMISSIONS_WRITE_EXTERNAL_STORAGE = 123;
     private static final String SHARED_PREFERENCES_TITLE = "Share Title";
-    ImageView sharedQuestion;
-    EditText sharedTitle;
+    private EditText sharedTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -43,7 +42,7 @@ public class ShareActivity extends AppCompatActivity {
         setContentView(R.layout.activity_share);
 
         sharedTitle = findViewById(R.id.edit_text_share_title);
-        sharedQuestion = findViewById(R.id.image_view_question);
+        ImageView sharedQuestion = findViewById(R.id.image_view_question);
         sharedQuestion.setImageResource(getIntent().getIntExtra("QuestionShare" , 0));
 
         SharedPreferences sharedPreferences = getSharedPreferences("lastEditText", MODE_PRIVATE);
@@ -51,10 +50,9 @@ public class ShareActivity extends AppCompatActivity {
         sharedTitle.setText(questionTitle);
     }
 
-    public void androidVersion(View view){
+    public void shareMethodVersion(View view){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P){
-            backgroundTask backgroundTask = new backgroundTask();
-            backgroundTask.start();
+            shareButton();
         }else{
             checkPermissionAndShare();
         }
@@ -154,33 +152,6 @@ public class ShareActivity extends AppCompatActivity {
         System.out.println(imageUri.toString());
 
         return imageUri;
-    }
-
-
-    class backgroundTask extends Thread
-    {
-        @Override
-        public void run() {
-
-                try {
-                    // putting it into a file since 24+API doesn't allow to get Uri out of the application.
-                    File photosDir = new File(getCacheDir() , "photos");
-                    if (!photosDir.exists()){
-                        photosDir.mkdirs();
-                    }
-                    File file = new File(photosDir, System.currentTimeMillis() + "." + "png");
-                    FileOutputStream fOut = new FileOutputStream(file);
-                    fOut.flush();
-                    fOut.close();
-                    shareButton();
-
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-
     }
 
 }
